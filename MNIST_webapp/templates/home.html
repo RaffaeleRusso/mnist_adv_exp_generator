@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Adversarial example MNIST</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    </head>
+
+    <body>
+
+        <!-- Website Title -->
+    	<div class="container">
+    		<h2 class='container-heading'><span style="color: black;">Adversarial examples generator for MNIST</span></h2>
+            <div class='description'>
+    		</div>
+    	</div>
+
+        <!-- Text Area -->
+    	<div class="ml-container">
+    		<form action="/predict" enctype="multipart/form-data" method="POST">
+                <label for="myfile">Load a pic:</label>
+                <input type="file" id="file" name="file" onchange= "loadFile(event)" >
+                <label for="pixels">Pixel</label>
+                <select name="pixels" id="pixels">
+                    <option value="1">1</option>
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="30">30</option>
+                    <option value="50">50</option>
+                </select>
+                <input  type="submit" accept=".png"   id = "predict" class="my-cta-button"  value="Attack" disabled >
+            </form>
+            <figure>
+                <img id="output" name="output" width = "212px" height = "auto" src="{{ url_for('static', filename='Loading_icon.gif') }}" />	
+                <figcaption style="font-size : 50%; font-family: 'Times New Roman', Times, serif; " >  <br> <br> Adversarial examples are generated with the optimization algorithm differential evolution. Input should be a 28x28 png picture.<br>
+            </figure>
+            
+
+       
+
+
+<script>
+var loadFile = function(event) {
+	var image = document.getElementById('output');
+	image.src = URL.createObjectURL(event.target.files[0]);
+    document.getElementById("predict").disabled = false
+};
+</script>
+    </body>
+</html>

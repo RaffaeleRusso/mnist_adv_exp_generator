@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+	<head>
+		<meta charset="utf-8">
+		<title>Adversarial example MNIST</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+		
+	</head>
+
+	<body>
+
+		<!-- Website Title -->
+		<div class="container">
+    		<h2 class='container-heading'><span style="color: black;">Adversarial examples generator for MNIST</span></h2>
+            <div class='description'>
+    		</div>
+    	</div>
+
+		<!-- Result -->
+		<div class="results">
+			{% if prediction[0] != prediction[1] %}
+				<h1><span class='danger'>Attack success! This is the adversarial example.</span></h1>
+				<figure>
+					<img src = "data:image/jpeg;base64,{{ img_data }}" width="200" height="200">
+					<figcaption style="font-size : 150%; font-family: 'Times New Roman', Times, serif; " >Before attack: {{prediction[0]}} <br> After attack: {{prediction[1]}}<br>
+						<form action="/">
+							<input type="submit" value="Previous page" />
+						</form>
+					<br>
+					</figcaption>
+				</figure>
+			{% elif prediction[0] == prediction[1] %}
+				<h1><span class='safe'>Sorry! Attack Failed. <br> 
+					<form action="/">
+						<input type="submit" value="Previous page" />
+					</form>
+				</span></h1>
+				
+			{% endif %}
+		</div>
+		
+
+		
+
+	</body>
+</html>
